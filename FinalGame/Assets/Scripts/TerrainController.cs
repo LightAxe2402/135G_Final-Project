@@ -17,20 +17,20 @@ public class TerrainController : MonoBehaviour
     public int pitWidthMax;
     public int platformWidthMin;
     public int platformWidthMax;
+    public bool generate = true;
 
     private float[,] heights;
     private int deltaX = 0;
     private Terrain terrain;
-    private float counter = 0;
+    public float counter = 0;
     //private Material mat;
-
 
     private int pitWidth = 0;
     private int pitWidthCounter = 0;
     private int platformWidth = 0;
     private int platformWidthCounter = 0;
     private bool makingPlatform = true;
-
+    private bool generateBuffer = false;
 
     private void Start()
     {
@@ -46,7 +46,6 @@ public class TerrainController : MonoBehaviour
         platformWidth = Random.Range(platformWidthMin, platformWidthMax);
 
         terrain = GetComponent<Terrain>();
-        //mat = GetComponent<Material>();
         terrain.terrainData.heightmapResolution = width + 1;
         terrain.terrainData.size = new Vector3(width, depth, height);
         terrain.terrainData = GenerateTerrain(terrain.terrainData);
@@ -74,7 +73,11 @@ public class TerrainController : MonoBehaviour
 
     float GenerateHeights()
     {
-        if(makingPlatform == true)
+        if(generateBuffer == true)
+        {
+            return 1 * depth;
+        }
+        else if(makingPlatform == true)
         {
             platformWidthCounter++;
             if(platformWidthCounter >= platformWidth)
@@ -134,14 +137,20 @@ public class TerrainController : MonoBehaviour
 
     private void Update()
     {
-        terrain.terrainData = GenerateTerrain(terrain.terrainData);
-        //mat.mainTextureOffset = new Vector2(counter, 0);
         counter += speed;
-
-        /*if(counter >= 256)
+        if (generate)
         {
-            counter = 0;
-        }*/
+            terrain.terrainData = GenerateTerrain(terrain.terrainData);
+        }
+    }
+    
+    public void generateBufferTerrain()
+    {
+        generateBuffer = true;
+    }
 
+    public void stopBufferTerrainGen()
+    {
+        generateBuffer = false;
     }
 }
