@@ -11,7 +11,8 @@ public class behavior : MonoBehaviour
 
         if(!particles.IsAlive())
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
