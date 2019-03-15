@@ -338,10 +338,7 @@ MonoBehaviour:
   width: 256
   height: 256
   depth: 50
-  holeWidth: 0.75
   speed: 0.075
-  scale: 10
-  period: 2
   pitWidthMin: 15
   pitWidthMax: 30
   platformWidthMin: 30
