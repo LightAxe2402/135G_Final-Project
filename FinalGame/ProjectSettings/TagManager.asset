@@ -9,6 +9,7 @@ TagManager:
   - pickup
   - Enemy
   - Exit
+  - PushBlock
   layers:
   - Default
   - TransparentFX

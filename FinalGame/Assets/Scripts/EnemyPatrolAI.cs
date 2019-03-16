@@ -54,8 +54,8 @@ public class EnemyPatrolAI : MonoBehaviour
     private void SetNewPoint(GameObject point)
     {
         // Setting the Destination
-        //agent.SetDestination(point.transform.position);
         agent.destination = point.transform.position;
+        agent.speed = patrolSpeed;
         currentPatrolPoint = point;
 
         return;
