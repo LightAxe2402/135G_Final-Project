@@ -12,8 +12,8 @@ public class Controller3D : MonoBehaviour
     [SerializeField] private string targetRoom = "";
 
     private Rigidbody rb;
-    private Vector3 input = Vector3.zero;
-    private bool pushing = false;
+    [Header("Debug")] [SerializeField] private Vector3 input = Vector3.zero;
+    [SerializeField] private bool pushing = false;
 
     /// <summary>
     /// Getting Private References
@@ -25,21 +25,18 @@ public class Controller3D : MonoBehaviour
     }
 
     /// <summary>
-    /// Resetting Player States
-    /// </summary>
-    private void Update()
-    {
-        if (input == Vector3.zero)
-            pushing = false;
-    }
-
-    /// <summary>
     /// Getting Input and Adding the input force to the RigidBody
     /// </summary>
     private void FixedUpdate()
     {
         // Applying Force Based on Input Recieved from GetDirectionInput
-        input = GetDirectionInput();
+        if (!pushing)
+            input = GetDirectionInput();
+        else if (GetDirectionInput() != input) {
+            input = Vector3.zero;
+            pushing = false;
+        }
+
         rb.velocity = input * ((!pushing) ? moveForce : pushForce);
     }
 
@@ -85,6 +82,9 @@ public class Controller3D : MonoBehaviour
         {
             if (input != Vector3.zero)
             {
+                if (input.x != 0f && input.z != 0f)
+                    return;
+
                 Debug.Log("Pushing");
                 pushing = true;
 
@@ -100,14 +100,17 @@ public class Controller3D : MonoBehaviour
     /// <returns></returns>
     private Vector3 GetDirectionInput()
     {
+        /*
         // Setting the Input tracker variable
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             return new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
             return new Vector3(0f, 0f, Input.GetAxis("Vertical"));
-
-
+        
         // Returning the input
         return Vector3.zero;
+        */
+
+        return new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
     }
 }

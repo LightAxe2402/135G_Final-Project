@@ -6,6 +6,7 @@ public class playerController : MonoBehaviour
 {
     public float gravity;
     public float jumpSpeed;
+    public float jumpRotation;
 
     private float verticalSpeed;
     private Rigidbody rb;
@@ -39,7 +40,7 @@ public class playerController : MonoBehaviour
 
         Ray ray = new Ray(currentPosition, desiredPosition);
         RaycastHit hit;
-        Quaternion rotation = Quaternion.Euler(baseRotation.eulerAngles.x - verticalSpeed * 10, baseRotation.eulerAngles.y, baseRotation.eulerAngles.z);
+        Quaternion rotation = Quaternion.Euler(baseRotation.eulerAngles.x - verticalSpeed * jumpRotation, baseRotation.eulerAngles.y, baseRotation.eulerAngles.z);
         //Debug.DrawRay(currentPosition, desiredPosition, Color.green);
 
         if (!Physics.Raycast(ray, out hit, direction.magnitude) || hit.transform.tag != "ground")

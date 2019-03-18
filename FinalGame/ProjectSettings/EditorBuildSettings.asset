@@ -6,9 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/BikeLevel1.unity
+    guid: 48266b19c97c0cc4593a21af108b52e4
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
     guid: ae35e077d4aa8834987e7e685e33273c
   - enabled: 1
-    path: Assets/Scenes/Rees.unity
+    path: Assets/Scenes/BikeLevel2.unity
+    guid: 3e9b439550fea074f898616dcb1143cd
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 770c27b7a9849114389b4c1a01836816
+  - enabled: 1
+    path: Assets/Scenes/BikeLevel3.unity
     guid: dd5ad33bfb3966d4cb45c580c67d44f9
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 9ccabfd0b9912744c8b47e39e6697002
   m_configObjects: {}

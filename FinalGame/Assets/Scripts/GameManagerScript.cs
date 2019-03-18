@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -18,18 +19,22 @@ public class GameManagerScript : MonoBehaviour
     public float bufferDistance = 1f;
     public Text winText;
     public Text scoreText;
+    public Text continueText;
+    public string nextLevelName;
 
     private playerController pc;
     private TerrainController terrainScript;
     private float counter = 0f;
     private float spawnTime;
     private bool finished = false;
+    private bool canContinue = false;
 
     private void Start()
     {
         spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         pc = player.GetComponent<playerController>();
         winText.text = "";
+        continueText.text = "";
         terrainScript = terrainObj.GetComponent<TerrainController>();
     }
 
@@ -44,6 +49,11 @@ public class GameManagerScript : MonoBehaviour
         {
             Application.Quit();
         }
+        if(Input.GetKey("return") && canContinue == true)
+        {
+            Debug.Log("pressed enter");
+            SceneManager.LoadScene(nextLevelName);
+        }
         counter += Time.deltaTime;
         if(counter >= spawnTime && finished == false)
         {
@@ -55,10 +65,12 @@ public class GameManagerScript : MonoBehaviour
         if (terrainScript.counter >= distanceToObjective)
         {
             winText.text = "Destination Reached!";
+            continueText.text = "Press Enter To Continue";
             stopTerrain();
             pc.disableEffects();
             destination.GetComponent<Animator>().SetBool("destinationReached", true);
-            
+            canContinue = true;
+            Debug.Log("canContinue: " + canContinue);
         }
         else if (terrainScript.counter >= distanceToObjective-bufferDistance)
         {
